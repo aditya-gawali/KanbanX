@@ -18,7 +18,7 @@ code {
 .body{
   margin:0;
   padding:0;
-  background-image: url('./imges/bg-login-img.jpg');
+  background-image: url('./pages/imges/bg-login-img.jpg');
   background-repeat:no-repeat;
 
   background-size:cover;
@@ -112,4 +112,18 @@ code {
   color:#333;
 }
 
+
+/*Homepage css*/
+
+.button-header{
+  position:absolute;
+  right:100px;
+  align-items:center;
+  
+}
+
+.button-header button:hover{
+  box-shadow:1px 1px 4px black;
+  
+}
 

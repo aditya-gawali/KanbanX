@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+
 
 
 
@@ -27,7 +29,7 @@ const Loginpage = () => {
                 <button type="submit"  className="btn-login">Log in</button>
 
                 <div className="register-link">
-                    <p>Don't have an account ? <a href="#">Register Here!</a></p>
+                    <p>Don't have an account ? <Link to="/Signup">Register Here!</Link></p>
                 </div>
 
 
