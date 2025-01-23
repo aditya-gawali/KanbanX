@@ -8,13 +8,14 @@ const db = require('./connection/db');
 const userRouter = require('./routes/user.router');
 const boardRouter = require('./routes/board.route');
 const columnRouter = require('./routes/column.route')
+const cors = require('cors');
 db();
 
 
 const app = express();
 const port = process.env.PORT || 8000;
 
-
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 

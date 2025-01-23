@@ -1,41 +1,65 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const Signuppage = () => {
-  return (
-    <div className = "body">
 
-        <div className = "form-container" >
-            <form action="/server">
-                <h1 style={{fontSize:"36px",textAlign:"center"}}>Sign up</h1>
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-                <div className='input-box'>
-                    
-                    <input type="text" placeholder="Name" require/>
-                </div>
+        axios.post('http://localhost:8080/users/signup', {
+            name: name,
+            email: email,
+            password: password
+        })
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
 
-                <div className="input-box">
-                    <input type="email"placeholder="Email" required/>
-                </div>
+        setName("");
+        setEmail("");
+        setPassword("");
+    }
 
-                <div className="input-box">
-                    <input type="password"placeholder="password" required/>
-                </div>
-                
-                
-                
-                <button type="submit"  className="btn-login">Sign up</button>
+    return (
+        <div className="body">
 
-                <div className="register-link">
-                    <p>Have an account ? <Link to="/Login" >Login Here!</Link></p>
-                </div>
+            <div className="form-container" >
+                <form onSubmit={handleSubmit}>
+                    <h1 style={{ fontSize: "36px", textAlign: "center" }}>Sign up</h1>
+
+                    <div className='input-box'>
+                        <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} require />
+                    </div>
+
+                    <div className="input-box">
+                        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    </div>
+
+                    <div className="input-box">
+                        <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    </div>
 
 
-            </form>
-      
+
+                    <button type="submit" className="btn-login">Sign up</button>
+
+                    <div className="register-link">
+                        <p>Have an account ? <Link to="/Login" >Login Here!</Link></p>
+                    </div>
+
+
+                </form>
+
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default Signuppage

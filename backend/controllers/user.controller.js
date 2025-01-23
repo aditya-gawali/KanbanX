@@ -4,7 +4,7 @@ const User = require('../models/user.model'); // Adjust the path as necessary
 require('dotenv').config();
 
 const signup = async (req, res) => {
-    const { name, email, phone, role, password } = req.body;
+    const { name, email, password } = req.body;
 
     try {
         const existingUser = await User.findOne({ email });
@@ -16,9 +16,7 @@ const signup = async (req, res) => {
 
         const newUser = new User({
             name,
-            phone,
             email,
-            role,
             password: hashedPassword
         });
 

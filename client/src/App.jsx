@@ -7,7 +7,6 @@ import Signuppage from './pages/Signup/Signuppage';
 import {Routes, Route, BrowserRouter } from 'react-router-dom';
 
 
-
 function App() {
   return (
     
