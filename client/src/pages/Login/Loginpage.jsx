@@ -19,8 +19,8 @@ const Loginpage = () => {
                 </div>
                 
                 <div className = "remember-forgot">
-                    <label><input type="checkbox"/> Remeber Me</label>
-                    <a href="#">Fogot Password ?</a>
+                <label><input type="checkbox"/> Remeber Me</label>
+                <a href="#">Fogot Password ?</a>
                 </div>
                 
                 
