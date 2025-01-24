@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const Signuppage = () => {
+
+    const navigate = useNavigate();
+
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -14,7 +17,7 @@ const Signuppage = () => {
             name: name,
             email: email,
             password: password
-        })
+        }, { withCredentials: true })
             .then(response => {
                 console.log(response.data);
             })
@@ -25,6 +28,8 @@ const Signuppage = () => {
         setName("");
         setEmail("");
         setPassword("");
+
+        navigate('/login')
     }
 
     return (

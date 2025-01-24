@@ -26,8 +26,8 @@ const HeaderBar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="button-header">
-              <button  onClick={handleSignupClick}type="button" class="btn btn-primary " style={{marginLeft:"40px",alignItems:"center",color:"#1a0f91", backgroundColor:"#fe7e73"}}>Sign up</button>
-              <button onClick={handleLoginClick} type="button" class="btn btn-primary  " style={{marginLeft:"40px",alignItems:"center",color:"#1a0f91", backgroundColor:"#fe7e73"}}>Log in</button>
+              <button  onClick={handleSignupClick}type="button" className="btn btn-primary " style={{marginLeft:"40px",alignItems:"center",color:"#1a0f91", backgroundColor:"#fe7e73"}}>Sign up</button>
+              <button onClick={handleLoginClick} type="button" className="btn btn-primary  " style={{marginLeft:"40px",alignItems:"center",color:"#1a0f91", backgroundColor:"#fe7e73"}}>Log in</button>
                 
               </Nav>
             </Navbar.Collapse>

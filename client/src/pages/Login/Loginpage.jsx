@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 
 
 const Loginpage = () => {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -15,7 +17,7 @@ const Loginpage = () => {
         axios.post('http://localhost:8080/users/login', {
             email: email,
             password: password
-        })
+        }, { withCredentials: true })
             .then(response => {
                 console.log(response.data);
             })
@@ -25,6 +27,9 @@ const Loginpage = () => {
 
         setEmail("");
         setPassword("");
+
+
+        // navigate('/')
     }
     return (
         <div className="body">
