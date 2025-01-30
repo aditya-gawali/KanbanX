@@ -29,7 +29,7 @@ const Loginpage = () => {
         setPassword("");
 
 
-        // navigate('/')
+        navigate('/dashboard')
     }
     return (
         <div className="body">
