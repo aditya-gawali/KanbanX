@@ -66,7 +66,7 @@ code {
 .body {
   margin: 0;
   padding: 0;
-  background-image: url('./pages/imges/bg-login-img.jpg');
+  background-image: url('./assets/bg-login-img.jpg');
   background-repeat: no-repeat;
 
   background-size: cover;

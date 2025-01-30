@@ -2,15 +2,18 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-const Signuppage = () => {
+import { toast } from 'react-toastify'
+
+const Signup = () => {
 
     const navigate = useNavigate();
-
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const handleSubmit = (e) => {
+        const toastId = toast.loading("Signing in..."); // Show loading toast
+
         e.preventDefault();
 
         axios.post('http://localhost:8080/users/signup', {
@@ -20,9 +23,21 @@ const Signuppage = () => {
         }, { withCredentials: true })
             .then(response => {
                 console.log(response.data);
+                toast.update(toastId, {
+                    render: "Signed in successfully!",
+                    type: "success",
+                    isLoading: false,
+                    autoClose: 4000,
+                });
             })
             .catch(error => {
                 console.error('There was an error!', error);
+                toast.update(toastId, {
+                    render: error.message,
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 4000,
+                });
             });
 
         setName("");
@@ -67,4 +82,4 @@ const Signuppage = () => {
     )
 }
 
-export default Signuppage
+export default Signup

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import HeaderBar from './HeaderBar';
-import Hero from './Hero';
+import HeaderBar from '../components/HeaderBar';
+import Hero from '../components/Hero';
 // import BotumFooter from './BotumFooter';
 // import Functions from './Function';
 
@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import { useEffect } from 'react';
 
-const Homepage = () => {
+const Home = () => {
 
   const [userID, setUserID] = useState("");
 
@@ -37,10 +37,9 @@ const Homepage = () => {
 
   return (
     <>
-      <HeaderBar />
       <Hero />
     </>
   )
 }
 
-export default Homepage
+export default Home

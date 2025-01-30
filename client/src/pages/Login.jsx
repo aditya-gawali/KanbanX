@@ -2,16 +2,19 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
+import { toast } from 'react-toastify'
 
 
 
-const Loginpage = () => {
+const Login = () => {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleSubmit = (e) => {
+        const toastId = toast.loading("Logging in...");
+
         e.preventDefault();
 
         axios.post('http://localhost:8080/users/login', {
@@ -20,9 +23,21 @@ const Loginpage = () => {
         }, { withCredentials: true })
             .then(response => {
                 console.log(response.data);
+                toast.update(toastId, {
+                    render: "Logged in successfully!",
+                    type: "success",
+                    isLoading: false,
+                    autoClose: 4000,
+                });
             })
             .catch(error => {
                 console.error('There was an error!', error);
+                toast.update(toastId, {
+                    render: error.message,
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 4000,
+                });
             });
 
         setEmail("");
@@ -67,4 +82,4 @@ const Loginpage = () => {
     )
 }
 
-export default Loginpage
+export default Login

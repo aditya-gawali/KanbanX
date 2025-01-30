@@ -90,7 +90,7 @@ const Sidebar = () => {
         },
     ];
     return (
-        <div className="fixed left-0 top-0 md:w-[230px] w-[60px] overflow-hidden h-full flex flex-col">
+        <div className="fixed left-0 z-50 top-0 md:w-[230px] w-[60px] overflow-hidden h-full flex flex-col">
             <div className="w-full flex items-center md:justify-start justify-center md:pl-5 h-[70px] bg-[#fff]">
                 <span className="text-orange-400 font-semibold text-2xl md:block hidden">Logo.</span>
                 <span className="text-orange-400 font-semibold text-2xl md:hidden block">L.</span>

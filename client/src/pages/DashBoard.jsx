@@ -8,8 +8,6 @@ const DashBoard = () => {
         <>
 
             <div className="w-screen h-screen relative">
-                <Sidebar/>
-                <NavbarD/>
                 <Board/>
             </div>
         </>
