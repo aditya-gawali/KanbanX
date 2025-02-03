@@ -1,5 +1,4 @@
 
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, BrowserRouter, Outlet } from 'react-router-dom';
 import DashBoard from './pages/DashBoard';

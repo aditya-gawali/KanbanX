@@ -4,7 +4,7 @@ const { addColumn, updateColumn, deleteColumn } = require('../controllers/column
 const jwtAuth = require('../middlewares/jwtAuth');
 
 const router = express.Router();
-router.use(jwtAuth);
+// router.use(jwtAuth);
 
 // POST /api/columns: Add a new column to a board
 router.post('/', addColumn);

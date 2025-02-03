@@ -14,7 +14,13 @@ exports.getAllBoards = async (req, res) => {
 // Get a specific board by ID
 exports.getBoardById = async (req, res) => {
     try {
-        const board = await Board.findById(req.params.id).populate('columns'); // Ensure 'columns' is the correct field name in the Board model
+        const board = await Board.findById(req.params.id).populate({
+            path: 'columns',
+            populate: {
+                path: 'tasks'
+            }
+        }); // Ensure 'columns' is the correct field name in the Board model
+
         if (!board) {
             return res.status(404).json({ message: 'Board not found' });
         }

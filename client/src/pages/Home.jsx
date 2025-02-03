@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import HeaderBar from '../components/HeaderBar';
 import Hero from '../components/Hero';
+import Function from '../components/Function';
+import FooterHomePage from '../components/FooterHomepage';
+import Team from '../components/Team';
 // import BotumFooter from './BotumFooter';
 // import Functions from './Function';
 
@@ -38,6 +41,9 @@ const Home = () => {
   return (
     <>
       <Hero />
+      <Function/>
+      <Team/>
+      <FooterHomePage/>
     </>
   )
 }

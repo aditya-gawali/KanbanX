@@ -1,11 +1,13 @@
 const Column = require('../models/column.model');
 const Board = require('../models/board.model');
+const Task = require('../models/task.model');
+
 
 // Add a new column to a board
 exports.addColumn = async (req, res) => {
     try {
-        const { title } = req.body;
-        const boardId = req.cookies.board._id;
+        const { title, boardId } = req.body;
+        // const boardId = req.cookies.board._id;
         const newColumn = new Column({
             title,
             boardId
@@ -41,13 +43,24 @@ exports.updateColumn = async (req, res) => {
 // Remove a column
 exports.deleteColumn = async (req, res) => {
     try {
-        const boardId = req.cookies.board._id;
-        console.log(boardId);
+        // const boardId = req.cookies.board._id;
+        // console.log(boardId);
+        const { boardId } = req.body;
         const columnId = req.params.id;
         await Board.findByIdAndUpdate(
             boardId,
             { $pull: { columns: columnId } }, // Pull the columnId from the columns array
             { new: true } // Return the updated document
+        );
+
+        const column = await Column.findById(columnId);
+        if (column && column.tasks.length > 0) {
+            await Task.deleteMany({ _id: { $in: column.tasks } });
+        }
+
+        await Column.updateOne(
+            { _id: columnId },
+            { $set: { tasks: [] } } // Clear the tasks array
         );
         const deletedColumn = await Column.findByIdAndDelete(columnId);
         if (!deletedColumn) {

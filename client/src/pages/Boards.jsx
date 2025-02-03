@@ -10,26 +10,25 @@ const Boards = () => {
     const [myBoard, setMyBoard] = useState(null)
 
 
-    useEffect(() => {
-        const fetchBoardDetails = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8080/boards/${id}`)
-                setMyBoard(response.data)
-            } catch (error) {
-                console.error('Error fetching board details:', error)
-            }
+    const fetchBoardDetails = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/boards/${id}`)
+            setMyBoard(response.data)
+        } catch (error) {
+            console.error('Error fetching board details:', error)
         }
+    }
+    useEffect(() => {
 
         if (id) {
             fetchBoardDetails()
         }
     }, [id])
 
-    console.log(myBoard)
 
     return (
         <>
-            {myBoard && <Board columns={myBoard.columns} />}
+            {myBoard && <Board board={myBoard} columns={myBoard.columns} />}
         </>
     )
 }

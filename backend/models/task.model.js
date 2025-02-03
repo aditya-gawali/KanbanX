@@ -31,7 +31,7 @@ const taskSchema = new mongoose.Schema({
     },
     activityLogs: [{
         type: String
-    }], 
+    }],
 }, {
     timestamps: true
 });

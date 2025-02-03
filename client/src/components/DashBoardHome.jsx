@@ -4,6 +4,9 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
 
+import { toast } from 'react-toastify'
+
+
 // import { FaRegClipboard } from 'react-icons/fa';
 
 const DashBoardHome = ({ userId }) => {
@@ -24,6 +27,7 @@ const DashBoardHome = ({ userId }) => {
   }
 
   const fetchData = async () => {
+
     if (userId) {
       await getUserBoards(userId)
     }
@@ -41,30 +45,58 @@ const DashBoardHome = ({ userId }) => {
   };
 
   const handleSubmit = async (e) => {
+    const toastId = toast.loading("Creating New Board...");
+
     e.preventDefault();
     // Add logic to create a new board
     try {
-      const response = await axios.post('http://localhost:8080/boards', {
+      await axios.post('http://localhost:8080/boards', {
         title: newBoard.title,
         desc: newBoard.description,
         userId: userId
       });
-      console.log('Board created successfully:', response.data);
+      toast.update(toastId, {
+        render: "Board created successfully!",
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
+      // console.log('Board created successfully:', response.data);
       fetchData()
 
     } catch (error) {
       console.error('There was an error creating the board!', error);
+      toast.update(toastId, {
+        render: 'Board Not Created!',
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
     }
 
     handleClose();
   };
 
   const handleDelete = async (id) => {
+    const toastId = toast.loading("Deleting Board...");
+
     try {
       await axios.delete(`http://localhost:8080/boards/${id}`);
+      toast.update(toastId, {
+        render: "Board deleted successfully!",
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
       fetchData();
     } catch (error) {
       console.error('There was an error deleting the board!', error);
+      toast.update(toastId, {
+        render: 'Board not deleted!',
+        type: "error",
+        isLoading: false,
+        autoClose: 2000,
+      });
     }
   }
 
@@ -84,7 +116,7 @@ const DashBoardHome = ({ userId }) => {
         </Col>
       </Row>
       <Row >
-        {boards.map((board) => (
+        {boards.length == 0 ? "No Boards availble" : boards.map((board) => (
           <Col key={board.id} sm={12} md={6} lg={4} className='p-2'>
             <Card>
               <Card.Body>

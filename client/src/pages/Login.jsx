@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { toast } from 'react-toastify'
 
-
+import '../App.css'
 
 const Login = () => {
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    
+
 
     const handleSubmit = (e) => {
         const toastId = toast.loading("Logging in...");
@@ -29,7 +29,7 @@ const Login = () => {
                     render: "Logged in successfully!",
                     type: "success",
                     isLoading: false,
-                    autoClose: 4000,
+                    autoClose: 2000,
                 });
                 navigate('/dashboard')
             })
@@ -39,7 +39,7 @@ const Login = () => {
                     render: 'Invalid credentials!',
                     type: "error",
                     isLoading: false,
-                    autoClose: 4000,
+                    autoClose: 2000,
                 });
             });
 

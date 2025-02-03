@@ -23,7 +23,7 @@ const HeaderBar = () => {
   return (
     <>
 
-      <Navbar expand="lg" className="bg text-white pb-3 pt-2 fixed-top bg-white shadow-md" >
+      <Navbar expand="lg" className="bg w-full px-5 text-white pb-3 pt-2 fixed-top bg-white shadow-md" >
         <Container>
           <Navbar.Brand onClick={handleHomeClick} className='cursor-pointer' style={{ fontWeight: "800", fontSize: "25px", color: "#fe7a6e" }}>
 

@@ -8,7 +8,7 @@ const Hero = () => {
 
 
   return (
-    <div className="container m-5">
+    <div className="container m-5 ">
       <div className="row">
         <div className="col-6 p-5 ">
           <h1 style={{ fontWeight: "600" }} className="p-5"><span style={{ color: "#4f56ec" }}>Take Control</span> of <br />Your Projects<br /> with <span style={{ color: "#4f56ec" }}>KanbanX</span></h1>
