@@ -19,7 +19,7 @@ const DashBoardHome = ({ userId }) => {
 
   const getUserBoards = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:8080/boards/api/${id}`)
+      const response = await axios.get(`https://kanbanx-backend.onrender.com/boards/api/${id}`)
       setBoards(response.data)
     } catch (error) {
       console.error('Error fetching boards:', error)
@@ -50,7 +50,7 @@ const DashBoardHome = ({ userId }) => {
     e.preventDefault();
     // Add logic to create a new board
     try {
-      await axios.post('http://localhost:8080/boards', {
+      await axios.post('https://kanbanx-backend.onrender.com/boards', {
         title: newBoard.title,
         desc: newBoard.description,
         userId: userId
@@ -81,7 +81,7 @@ const DashBoardHome = ({ userId }) => {
     const toastId = toast.loading("Deleting Board...");
 
     try {
-      await axios.delete(`http://localhost:8080/boards/${id}`);
+      await axios.delete(`https://kanbanx-backend.onrender.com/boards/${id}`);
       toast.update(toastId, {
         render: "Board deleted successfully!",
         type: "success",

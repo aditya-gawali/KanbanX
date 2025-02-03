@@ -6,7 +6,7 @@ const Columns = ({ title, cards, columnId, color = "orange" }) => {
 
     const handleDeleteColumn = () => {
 
-        axios.delete(`http://localhost:8080/columns/${columnId}`)
+        axios.delete(`https://kanbanx-backend.onrender.com/columns/${columnId}`)
             .then(response => {
                 console.log('Column deleted successfully');
                 // Optionally, you can add more logic here, like updating the state or notifying the user

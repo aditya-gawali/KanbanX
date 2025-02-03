@@ -12,7 +12,7 @@ const Boards = () => {
 
     const fetchBoardDetails = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/boards/${id}`)
+            const response = await axios.get(`https://kanbanx-backend.onrender.com/boards/${id}`)
             setMyBoard(response.data)
         } catch (error) {
             console.error('Error fetching board details:', error)
