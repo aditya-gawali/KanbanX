@@ -16,7 +16,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 app.use(cors({
-    origin: 'http://localhost:5173', // Frontend URL
+    origin: 'https://kanban-x.vercel.app', // Frontend URL
     credentials: true,              // Allow credentials
 }));
 app.use(express.json());
