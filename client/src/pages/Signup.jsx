@@ -17,7 +17,7 @@ const Signup = () => {
 
         e.preventDefault();
 
-        axios.post('https://kanbanx-backend.onrender.com/users/signup', {
+        axios.post('ttp://localhost:8080/users/signup', {
             name: name,
             email: email,
             password: password
