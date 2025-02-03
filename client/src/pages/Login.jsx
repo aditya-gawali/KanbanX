@@ -12,6 +12,8 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    
+
     const handleSubmit = (e) => {
         const toastId = toast.loading("Logging in...");
 
@@ -29,11 +31,12 @@ const Login = () => {
                     isLoading: false,
                     autoClose: 4000,
                 });
+                navigate('/dashboard')
             })
             .catch(error => {
-                console.error('There was an error!', error);
+                console.error('Invalid credentials!', error);
                 toast.update(toastId, {
-                    render: error.message,
+                    render: 'Invalid credentials!',
                     type: "error",
                     isLoading: false,
                     autoClose: 4000,
@@ -44,7 +47,6 @@ const Login = () => {
         setPassword("");
 
 
-        navigate('/dashboard')
     }
     return (
         <div className="body">

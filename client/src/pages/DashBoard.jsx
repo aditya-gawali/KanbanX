@@ -1,15 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import NavbarD from '../components/NavbarD'
 import Board from '../components/Board'
+import JWTAuth from '../auth/JWTAuth'
+import axios from 'axios'
+import DashBoardHome from '../components/DashBoardHome'
+
+
 
 const DashBoard = () => {
+
+    const [user, setUser] = useState({})
+
+    const getUser = async (id) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/users/${id}`)
+            setUser(response.data)
+        } catch (error) {
+            console.error('Error fetching user:', error)
+        }
+    }
+
+   
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const userID = JWTAuth()
+            if (userID) {
+                await getUser(userID)
+            }
+        }
+        fetchData()
+    }, [])
+
+
+
+
+
     return (
         <>
-
-            <div className="w-screen h-screen relative">
-                <Board/>
-            </div>
+            <DashBoardHome userId={user._id} />
         </>
     )
 }

@@ -58,4 +58,19 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { signup, login };
+const getUserById = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const user = await User.findById(id);
+        res.status(200).json(user);
+        console.log(user)
+
+    } catch (error) {
+        console.log(error)
+    }
+
+
+}
+
+module.exports = { signup, login, getUserById };

@@ -3,10 +3,11 @@ const { getAllBoards, getBoardById, createBoard, updateBoard, deleteBoard } = re
 const jwtAuth = require('../middlewares/jwtAuth');
 
 const router = express.Router();
-router.use(jwtAuth);
+// router.use(jwtAuth);
 
 // GET /api/boards/:id: Get a specific board by ID
-router.get('/', getAllBoards);
+router.get('/api/:id', getAllBoards);
+
 router.get('/:id', getBoardById);
 
 // POST /api/boards: Create a new board

@@ -1,0 +1,147 @@
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { Card, Col, Row } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom'
+
+// import { FaRegClipboard } from 'react-icons/fa';
+
+const DashBoardHome = ({ userId }) => {
+  const navigate = useNavigate();
+
+  const [show, setShow] = useState(false);
+  const [newBoard, setNewBoard] = useState({ title: '', description: '' });
+  const [boards, setBoards] = useState([])
+
+
+  const getUserBoards = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/boards/api/${id}`)
+      setBoards(response.data)
+    } catch (error) {
+      console.error('Error fetching boards:', error)
+    }
+  }
+
+  const fetchData = async () => {
+    if (userId) {
+      await getUserBoards(userId)
+    }
+  }
+  useEffect(() => {
+    fetchData()
+  }, [userId])
+
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewBoard({ ...newBoard, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Add logic to create a new board
+    try {
+      const response = await axios.post('http://localhost:8080/boards', {
+        title: newBoard.title,
+        desc: newBoard.description,
+        userId: userId
+      });
+      console.log('Board created successfully:', response.data);
+      fetchData()
+
+    } catch (error) {
+      console.error('There was an error creating the board!', error);
+    }
+
+    handleClose();
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/boards/${id}`);
+      fetchData();
+    } catch (error) {
+      console.error('There was an error deleting the board!', error);
+    }
+  }
+
+  const handleView = (id) => {
+    navigate(`/board/${id}`)
+  }
+
+  return (
+    <div>
+
+      <Row className='p-3'>
+        <Col>
+          <h3 className='py-2'>My boards</h3>
+        </Col>
+        <Col className='text-right'>
+          <button className='btn btn-primary' onClick={handleShow}>Create New Board</button>
+        </Col>
+      </Row>
+      <Row >
+        {boards.map((board) => (
+          <Col key={board.id} sm={12} md={6} lg={4} className='p-2'>
+            <Card>
+              <Card.Body>
+                <Card.Title>
+                  {/* <FaRegClipboard />  */}
+                  {board.title}
+                </Card.Title>
+                <Card.Text>
+                  {board.description}
+                </Card.Text>
+                <Button variant="danger" className="float-right mx-2" onClick={() => handleDelete(board._id)}>
+                  Delete
+                </Button>
+                <Button variant="info" className="float-right mx-2" onClick={() => { handleView(board._id) }}>
+                  View
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Create New Board</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit} >
+            <Form.Group controlId="formBoardTitle" className='mb-2'>
+              <Form.Label>Board Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter board name"
+                name="title"
+                value={newBoard.title}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBoardDescription">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter description"
+                name="description"
+                value={newBoard.description}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Button variant="primary" className='my-2' type="submit">
+              Create
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
+    </div>
+
+  )
+}
+
+export default DashBoardHome

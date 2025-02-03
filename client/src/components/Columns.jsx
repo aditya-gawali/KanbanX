@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Columns = ({title, cards, color}) => {
+const Columns = ({ title, cards, color = "orange" }) => {
+
+    const [bgColor, setBgColor] = useState(`bg-gray-200`)
     return (
         <>
             <div className='w-[50%] h-full'>
-                <div className={`bg-${!color ? "gray" : color}-200 rounded-md m-2 text-center p-2`}>
+                <div className={`${bgColor} rounded-md m-2 text-center p-2`}>
                     {title}
                 </div>
-                
+
                 {
                     cards
                 }
