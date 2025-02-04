@@ -112,7 +112,7 @@ const Board = ({ board, columns }) => {
 
     const fetchBoardDetails = async (id) => {
         try {
-            const response = await axios.get(`ttp://localhost:8080/boards/${id}`)
+            const response = await axios.get(`http://localhost:8080/boards/${id}`)
             setColumnsData(response.data.columns)
         } catch (error) {
             console.error('Error fetching board details:', error)
@@ -129,7 +129,7 @@ const Board = ({ board, columns }) => {
 
         if (newColumnTitle) {
 
-            const res = await axios.post("ttp://localhost:8080/columns/", {
+            const res = await axios.post("http://localhost:8080/columns/", {
                 title: newColumnTitle,
                 boardId: board._id
             })
@@ -152,7 +152,7 @@ const Board = ({ board, columns }) => {
         const toastId = toast.loading("Deleting Column...");
 
 
-        axios.delete(`ttp://localhost:8080/columns/${id}`, {
+        axios.delete(`http://localhost:8080/columns/${id}`, {
             boardId: board._id
         }).then(response => {
             // console.log('Column deleted successfully', response);
@@ -191,7 +191,7 @@ const Board = ({ board, columns }) => {
         if (newTaskTitle) {
             try {
 
-                await axios.post("ttp://localhost:8080/tasks/", {
+                await axios.post("http://localhost:8080/tasks/", {
                     title: newTaskTitle,
                     columnId,
                     boardId: board._id
@@ -223,7 +223,7 @@ const Board = ({ board, columns }) => {
 
         try {
 
-            await axios.delete(`ttp://localhost:8080/tasks/${taskId}?columnId=${columnId}`);
+            await axios.delete(`http://localhost:8080/tasks/${taskId}?columnId=${columnId}`);
             toast.update(toastId, {
                 render: "Task Deleted successfully!",
                 type: "success",
@@ -249,7 +249,7 @@ const Board = ({ board, columns }) => {
     const moveTask = async (taskId, newColumnId) => {
         try {
             // Update in MongoDB
-            const res = await axios.put(`ttp://localhost:8080/tasks/${taskId}`, {
+            const res = await axios.put(`http://localhost:8080/tasks/${taskId}`, {
                 columnId: newColumnId
             })
 

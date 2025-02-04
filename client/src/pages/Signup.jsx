@@ -17,7 +17,7 @@ const Signup = () => {
 
         e.preventDefault();
 
-        axios.post('ttp://localhost:8080/users/signup', {
+        axios.post('http://localhost:8080/users/signup', {
             name: name,
             email: email,
             password: password

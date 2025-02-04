@@ -19,7 +19,7 @@ const Login = () => {
 
         e.preventDefault();
 
-        axios.post('ttp://localhost:8080/users/login', {
+        axios.post('http://localhost:8080/users/login', {
             email: email,
             password: password
         }, { withCredentials: true })

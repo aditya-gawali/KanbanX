@@ -14,7 +14,7 @@ const DashBoard = () => {
 
     const getUser = async (id) => {
         try {
-            const response = await axios.get(`ttp://localhost:8080/users/${id}`)
+            const response = await axios.get(`http://localhost:8080/users/${id}`)
             setUser(response.data)
         } catch (error) {
             console.error('Error fetching user:', error)
