@@ -16,10 +16,10 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         const toastId = toast.loading("Logging in...");
-
+        const url = import.meta.env.VITE_BACKEND_URL;
         e.preventDefault();
 
-        axios.post('http://localhost:8080/users/login', {
+        axios.post(`${url}/users/login`, {
             email: email,
             password: password
         }, { withCredentials: true })

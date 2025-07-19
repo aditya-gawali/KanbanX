@@ -14,10 +14,11 @@ const Signup = () => {
     const [password, setPassword] = useState("");
     const handleSubmit = (e) => {
         const toastId = toast.loading("Signing in..."); // Show loading toast
+        const url = import.meta.env.VITE_BACKEND_URL;
 
         e.preventDefault();
 
-        axios.post('http://localhost:8080/users/signup', {
+        axios.post(`${url}/users/signup`, {
             name: name,
             email: email,
             password: password

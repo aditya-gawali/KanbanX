@@ -5,7 +5,7 @@ require('dotenv').config();
 const db = require('./connection/db');
 
 
-const userRouter = require('./routes/user.router');
+const userRouter = require('./routes/user.route');
 const boardRouter = require('./routes/board.route');
 const columnRouter = require('./routes/column.route')
 const taskRouter = require('./routes/task.route')
@@ -17,6 +17,7 @@ const port = process.env.PORT || 8000;
 
 app.use(cors({
     origin: 'http://localhost:5173', // Frontend URL
+    origin: 'https://kanban-x.vercel.app', // Frontend URL
     credentials: true,              // Allow credentials
 }));
 app.use(express.json());

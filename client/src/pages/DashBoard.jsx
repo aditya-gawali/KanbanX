@@ -11,10 +11,11 @@ import DashBoardHome from '../components/DashBoardHome'
 const DashBoard = () => {
 
     const [user, setUser] = useState({})
+    const url = import.meta.env.VITE_BACKEND_URL;
 
     const getUser = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:8080/users/${id}`)
+            const response = await axios.get(`${url}/users/${id}`)
             setUser(response.data)
         } catch (error) {
             console.error('Error fetching user:', error)

@@ -41,9 +41,9 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <Function/>
-      <Team/>
-      <FooterHomePage/>
+      {/* <Function />
+      <Team />
+      <FooterHomePage /> */}
     </>
   )
 }

@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import axios from 'axios';
 
 const Columns = ({ title, cards, columnId, color = "orange" }) => {
+        const url = import.meta.env.VITE_BACKEND_URL;
 
 
     const handleDeleteColumn = () => {
 
-        axios.delete(`http://localhost:8080/columns/${columnId}`)
+        axios.delete(`${url}/columns/${columnId}`)
             .then(response => {
                 console.log('Column deleted successfully');
                 // Optionally, you can add more logic here, like updating the state or notifying the user

@@ -12,7 +12,7 @@ const Team = () => {
                         <img className="img-circule img-style" src={img1}></img>
                     </div>
                     <div className="row card-icons-container p-2 row_2 ">
-                        <div className="col-2"></div>
+                        <div className="col-3"></div>
                         <div className="col-3">
                             
                             <a href="https://www.linkedin.com/in/omkar-shirsath-0bb7b1258/"><i class="fa-brands fa-linkedin"></i></a>
