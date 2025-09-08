@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KanbanX - AI-powered collaborative project management platform. Automate tasks, collaborate in real-time, and boost productivity by 70%.">
+    <meta name="keywords" content="project management, kanban, AI, collaboration, task automation, productivity">
+    <meta property="og:title" content="KanbanX - AI-Powered Project Management">
+    <meta property="og:description" content="Transform your workflow with AI-powered task automation and real-time collaboration.">
+    <title>KanbanX - AI-Powered Collaborative Project Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .ai-glow {
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+        }
+        
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+        .dark {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .dark .glass {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .tech-stack-scroll {
+            animation: scroll 20s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body class="scroll-smooth">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-dark transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-white">
+                            Kanban<span class="text-green-400">X</span>
+                        </h1>
+                    </div>
+                    <div class="hidden md:block ml-10">
+                        <div class="flex items-baseline space-x-4">
+                            <a href="#features" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Features</a>
+                            <a href="#demo" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Demo</a>
+                            <a href="#pricing" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Pricing</a>
+                            <a href="#testimonials" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Testimonials</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="text-gray-300 hover:text-white transition">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+                        Get Started
+                    </button>
+                    <button id="mobileMenu" class="md:hidden text-gray-300 hover:text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobileMenuContent" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 glass-dark">
+                <a href="#features" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="#demo" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Demo</a>
+                <a href="#pricing" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Pricing</a>
+                <a href="#testimonials" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Testimonials</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20">
+            <div class="text-center slide-in">
+                <div class="inline-flex items-center px-4 py-2 rounded-full glass mb-6">
+                    <span class="text-green-400 mr-2">🚀</span>
+                    <span class="text-white text-sm">Introducing AI-Powered Workflows</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
+                    Project Management<br/>
+                    <span class="gradient-text bg-gradient-to-r from-green-400 to-blue-400">Reimagined with AI</span>
+                </h1>
+                <p class="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
+                    KanbanX understands your workflow, automates repetitive tasks, and helps teams collaborate 
+                    in real-time. Experience 70% faster task organization with intelligent automation.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-white text-purple-700 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105">
+                        <i class="fas fa-rocket mr-2"></i> Get Started Free
+                    </button>
+                    <button class="glass text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/20 transition transform hover:scale-105">
+                        <i class="fas fa-play-circle mr-2"></i> Watch Demo
+                    </button>
+                </div>
+                <div class="mt-12 flex justify-center space-x-8 text-white">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">50K+</div>
+                        <div class="text-sm opacity-80">Active Users</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">4.9/5</div>
+                        <div class="text-sm opacity-80">User Rating</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">99.9%</div>
+                        <div class="text-sm opacity-80">Uptime</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Floating elements -->
+        <div class="absolute top-20 left-10 floating">
+            <div class="w-20 h-20 bg-green-400 rounded-full opacity-20"></div>
+        </div>
+        <div class="absolute bottom-20 right-10 floating" style="animation-delay: 2s;">
+            <div class="w-32 h-32 bg-blue-400 rounded-full opacity-20"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Powerful Features for Modern Teams
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Everything you need to manage projects efficiently, powered by AI
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-xl p-8 hover-lift cursor-pointer border border-gray-200">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-400 to-green-600 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-brain text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">AI-Powered Automation</h3>
+                    <p class="text-gray-600 mb-4">
+                        Let AI understand your workflow and automatically organize tasks, suggest priorities, and predict bottlenecks before they happen.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Smart task categorization</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Automated priority suggestions</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Predictive analytics</li>
+                    </ul>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-xl p-8 hover-lift cursor-pointer border border-gray-200">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Real-Time Collaboration</h3>
+                    <p class="text-gray-600 mb-4">
+                        Work together seamlessly with conflict-free editing, instant updates, and smart notifications that keep everyone in sync.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Live cursor tracking</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Instant notifications</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>50+ concurrent users</li>
+                    </ul>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-xl p-8 hover-lift cursor-pointer border border-gray-200">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-400 to-purple-600 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-plug text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Smart Integrations</h3>
+                    <p class="text-gray-600 mb-4">
+                        Connect with your favorite tools. Seamless integration with Google Calendar, Slack, GitHub, and 100+ other platforms.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Google Workspace sync</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Slack notifications</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>API access</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section id="demo" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    See KanbanX in Action
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Drag & drop simplicity meets intelligent automation
+                </p>
+            </div>
+            <div class="relative">
+                <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl p-1">
+                    <div class="bg-white rounded-lg p-8">
+                        <!-- Kanban Board Demo -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-semibold text-gray-700">To Do</h3>
+                                    <span class="bg-gray-200 text-gray-600 px-2 py-1 rounded text-sm">3</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition cursor-move">
+                                        <div class="flex items-start justify-between mb-2">
+                                            <span class="text-sm font-medium">Design new landing page</span>
+                                            <span class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded">AI Suggested</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>Due tomorrow</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition cursor-move">
+                                        <span class="text-sm font-medium">Review pull requests</span>
+                                        <div class="flex items-center space-x-2 text-xs text-gray-500 mt-2">
+                                            <i class="fas fa-user"></i>
+                                            <span>John Doe</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-semibold text-gray-700">In Progress</h3>
+                                    <span class="bg-blue-200 text-blue-600 px-2 py-1 rounded text-sm">2</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition cursor-move border-l-4 border-blue-500">
+                                        <span class="text-sm font-medium">Implement authentication</span>
+                                        <div class="mt-2">
+                                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                                <div class="bg-blue-500 h-2 rounded-full" style="width: 60%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-semibold text-gray-700">Done</h3>
+                                    <span class="bg-green-200 text-green-600 px-2 py-1 rounded text-sm">5</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="bg-white p-3 rounded-lg shadow-sm opacity-75">
+                                        <span class="text-sm font-medium line-through">Setup CI/CD pipeline</span>
+                                        <div class="flex items-center space-x-2 text-xs text-gray-500 mt-2">
+                                            <i class="fas fa-check-circle text-green-500"></i>
+                                            <span>Completed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex items-center justify-center">
+                            <div class="bg-green-50 border border-green-200 rounded-lg px-4 py-2 flex items-center space-x-2">
+                                <i class="fas fa-robot text-green-600"></i>
+                                <span class="text-sm text-green-700">AI detected 2 tasks that can be automated</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits/Metrics Section -->
+    <section class="py-20 bg-gradient-to-r from-purple-600 to-blue-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-white">
+                <h2 class="text-4xl font-bold mb-12">Why Teams Choose KanbanX</h2>
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="glass rounded-lg p-6">
+                        <div class="text-4xl font-bold mb-2">70%</div>
+                        <div class="text-lg">Faster Task Organization</div>
+                    </div>
+                    <div class="glass rounded-lg p-6">
+                        <div class="text-4xl font-bold mb-2">50+</div>
+                        <div class="text-lg">Concurrent Users</div>
+                    </div>
+                    <div class="glass rounded-lg p-6">
+                        <div class="text-4xl font-bold mb-2">2x</div>
+                        <div class="text-lg">Productivity Boost</div>
+                    </div>
+                    <div class="glass rounded-lg p-6">
+                        <div class="text-4xl font-bold mb-2">24/7</div>
+                        <div class="text-lg">AI Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Powered by Modern Technology</h2>
+                <p class="text-xl text-gray-600">Built with the latest tools for performance and reliability</p>
+            </div>
+            <div class="overflow-hidden">
+                <div class="flex space-x-12 tech-stack-scroll">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="h-16 w-16 grayscale hover:grayscale-0 transition">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" class="h-16 w-16 grayscale hover:grayscale-0 transition">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="h-16 w-16 grayscale hover:grayscale-0 transition">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="h-16 w-16 grayscale hover:grayscale-0 transition">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis" class="h-16 w-16 grayscale hover:grayscale-0 transition">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="h-16 w-16 grayscale hover:grayscale-0 transition">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="h-16 w-16 grayscale hover:grayscale-0 transition">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS" class="h-16 w-16 grayscale hover:grayscale-0 transition">
+                    <!-- Duplicate for continuous scroll -->
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="h-16 w-16 grayscale hover:grayscale-0 transition">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" class="h-16 w-16 grayscale hover:grayscale-0 transition">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="h-16 w-16 grayscale hover:grayscale-0 transition">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="h-16 w-16 grayscale hover:grayscale-0 transition">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Loved by Teams Worldwide</h2>
+                <p class="text-xl text-gray-600">See what our customers have to say</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-6 hover-lift">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        "KanbanX's AI features have revolutionized how we manage projects. The automatic task prioritization saves us hours every week."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mr-3"></div>
+                        <div>
+                            <div class="font-semibold">Sarah Chen</div>
+                            <div class="text-sm text-gray-500">CTO at TechCorp</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-6 hover-lift">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        "The real-time collaboration features are incredible. Our distributed team feels more connected than ever before."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-400 rounded-full mr-3"></div>
+                        <div>
+                            <div class="font-semibold">Michael Torres</div>
+                            <div class="text-sm text-gray-500">Product Manager at StartupXYZ</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-6 hover-lift">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        "Seamless integration with our existing tools made the transition effortless. Best project management decision we've made."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mr-3"></div>
+                        <div>
+                            <div class="font-semibold">Emily Rodriguez</div>
+                            <div class="text-sm text-gray-500">Team Lead at DesignHub</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
